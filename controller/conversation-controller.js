@@ -1,7 +1,21 @@
-export const newConversation = async () => {
+import Conversation from "../model/Conversation.js";
+
+export const newConversation = async (req, res) => {
   try {
-    console.log("new conversation called from backend");
+    const senderId = req.body.senderId;
+    const receiverId = req.body.receiverId;
+    const exist = await Conversation.find({
+      members: { $all: [receiverId, senderId] },
+    });
+    if (exist.length) {
+      return res.status(200).json("conversation already exists");
+    }
+    const newConversation = new Conversation({
+      members: [receiverId, senderId],
+    });
+    await newConversation.save();
+    return res.status(200).json("conversation saved successfully");
   } catch (error) {
-    console.log("new Conversation failed", error.message);
+    res.status(500).json(error.message);
   }
 };
