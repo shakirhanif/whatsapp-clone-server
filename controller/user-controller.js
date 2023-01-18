@@ -14,3 +14,12 @@ export const addUser = async (req, res) => {
     res.status(500).json(error.message);
   }
 };
+
+export const getUsers = async (req, res) => {
+  try {
+    let users = await User.find();
+    res.status(200).json(users);
+  } catch (error) {
+    return res.status(400).json(error.message);
+  }
+};
