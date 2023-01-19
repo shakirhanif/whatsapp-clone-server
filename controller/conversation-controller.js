@@ -19,3 +19,16 @@ export const newConversation = async (req, res) => {
     res.status(500).json(error.message);
   }
 };
+export const getConversation = async (req, res) => {
+  try {
+    const senderId = req.body.senderId;
+    const receiverId = req.body.receiverId;
+    console.log(receiverId, senderId);
+    const conversation = await Conversation.findOne({
+      members: { $all: [receiverId, senderId] },
+    });
+    return res.status(200).json(conversation);
+  } catch (error) {
+    res.status(500).json(error.message);
+  }
+};
