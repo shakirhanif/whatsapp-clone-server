@@ -23,7 +23,6 @@ export const getConversation = async (req, res) => {
   try {
     const senderId = req.body.senderId;
     const receiverId = req.body.receiverId;
-    console.log(receiverId, senderId);
     const conversation = await Conversation.findOne({
       members: { $all: [receiverId, senderId] },
     });
