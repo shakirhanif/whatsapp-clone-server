@@ -2,9 +2,9 @@ import dotenv from "dotenv";
 import multer from "multer";
 dotenv.config();
 import { GridFsStorage } from "multer-gridfs-storage";
-
+const url = process.env.MONGODB_LOCAL;
 export const storage = new GridFsStorage({
-  url: "mongodb://localhost:27017/WhatsUpp",
+  url,
   options: { useNewUrlParser: true, useUnifiedTopology: true },
   file: (req, file) => {
     const match = ["image/png", "image/jpg"];
