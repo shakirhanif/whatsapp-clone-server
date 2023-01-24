@@ -1,6 +1,5 @@
 import User from "../model/User.js";
 export const addUser = async (req, res) => {
-  console.log(req.body);
   try {
     let userExist = await User.findOne({ sub: req.body.sub });
     if (userExist) {
