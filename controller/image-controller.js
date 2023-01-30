@@ -1,7 +1,7 @@
 import grid from "gridfs-stream";
 import mongoose from "mongoose";
 
-const url = "http://localhost:3000";
+const url = "https://happy-bull-nightgown.cyclic.app";
 const conn = mongoose.connection;
 let gfs;
 let gridFsBucket;
